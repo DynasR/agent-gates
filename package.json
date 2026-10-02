@@ -1,0 +1,40 @@
+{
+  "name": "agent-gates",
+  "version": "0.1.0",
+  "description": "Signale, dans de la matière externe, le texte qui se fait passer pour une instruction adressée à l'agent qui le lit. Il signale, il ne nettoie jamais.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "bin": {
+    "agent-gates": "./src/cli.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test/bench.test.ts",
+    "typecheck": "tsc --noEmit",
+    "chaos": "node test/chaos.ts"
+  },
+  "keywords": [
+    "prompt-injection",
+    "agent-security",
+    "guardrail",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Sandy Ratovondrahety",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DynasR/agent-gates.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
