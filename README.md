@@ -15,8 +15,22 @@ Sortie : `0` rien trouvé · `1` au moins un signalement · `2` erreur d'usage.
 Le code `1` n'est pas un verdict de malveillance : c'est *« un humain doit lire
 ce passage avant qu'un agent agisse dessus »*.
 
-Aucune dépendance à l'exécution. Node ≥ 22.6 exécute le TypeScript
-nativement — pas d'étape de compilation, pas de chargeur.
+Aucune dépendance à l'exécution.
+
+**Depuis un clone**, Node exécute le TypeScript directement — pas d'étape de
+compilation, pas de chargeur. Il faut **Node ≥ 22.18 (ligne 22) ou ≥ 23.6** :
+c'est là que Node retire les types sans drapeau. Entre 22.6 et 22.17, il faut
+ajouter `--experimental-strip-types` (`node --experimental-strip-types src/cli.ts …`).
+
+**Installé par npm**, le paquet livre du JavaScript, compilé au moment du
+`npm pack` dans `dist/` (non versionné). Node **refuse** d'exécuter du
+TypeScript situé sous `node_modules`, délibérément — un paquet qui ne
+publierait que ses `.ts` planterait à la première commande. Node ≥ 22.
+
+```bash
+npm install github:DynasR/agent-gates   # npm compile à l'installation
+npx agent-gates page-recuperee.html
+```
 
 ---
 

@@ -65,7 +65,10 @@ export async function main(argv: readonly string[]): Promise<number> {
   return tous.length > 0 ? 1 : 0;
 }
 
-const lance = process.argv[1] !== undefined && import.meta.url.endsWith('cli.ts');
+// cli.ts depuis un clone, cli.js une fois installé par npm (dist/, émis au
+// `npm pack` : Node refuse d'exécuter du TypeScript sous node_modules).
+const lance =
+  process.argv[1] !== undefined && /cli\.[jt]s$/.test(import.meta.url);
 if (lance) {
   process.exitCode = await main(process.argv.slice(2));
 }

@@ -4,19 +4,25 @@
   "description": "Signale, dans de la matière externe, le texte qui se fait passer pour une instruction adressée à l'agent qui le lit. Il signale, il ne nettoie jamais.",
   "type": "module",
   "engines": {
-    "node": ">=22.6"
+    "node": ">=22"
   },
   "bin": {
-    "agent-gates": "./src/cli.ts"
+    "agent-gates": "./dist/cli.js"
   },
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "files": [
-    "src",
+    "dist",
     "README.md"
   ],
   "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
     "test": "node --test test/bench.test.ts",
     "typecheck": "tsc --noEmit",
     "chaos": "node test/chaos.ts"
